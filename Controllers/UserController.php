@@ -1,5 +1,6 @@
 <?php
-require_once '../models/User.php';
+require_once __DIR__ . '/../Models/User.php';
+require_once __DIR__ . '/../Models/Transaction.php';
 
 class UserController {
     private function checkLoggedIn() {

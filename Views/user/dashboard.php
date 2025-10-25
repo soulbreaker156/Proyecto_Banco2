@@ -1,6 +1,6 @@
 <?php 
 $title = 'Dashboard'; 
-require_once '../views/layouts/header.php'; 
+require_once __DIR__ . '/../layouts/header.php'; 
 ?>
 
 <div class="header">

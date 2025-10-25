@@ -1,4 +1,7 @@
-<?php $title = 'Iniciar Sesión'; require_once '../views/layouts/header.php'; ?>
+<?php 
+$title = 'Iniciar Sesión'; 
+require_once __DIR__ . '/../layouts/header.php'; 
+?>
 
 <div class="form-container">
     <h2>Iniciar Sesión</h2>
@@ -19,4 +22,5 @@
     </form>
 </div>
 
-<?php require_once '../views/layouts/footer.php'; ?>
+<?php require_once __DIR__ . '/../layouts/footer.php'; ?>
+<script src="/Proyecto_Banco2/Public/js/auth.js"></script>
