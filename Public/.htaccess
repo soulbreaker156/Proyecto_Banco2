@@ -1,0 +1,12 @@
+# Activa el motor de reescritura
+RewriteEngine On
+
+# Establece el directorio raíz del proyecto (ajústalo si está en una subcarpeta)
+RewriteBase /
+
+# Si el archivo o directorio existe, no reescribas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige todas las peticiones a index.php
+RewriteRule ^ index.php [QSA,L]
