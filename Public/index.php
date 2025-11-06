@@ -1,11 +1,27 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/conexion.php';
+require_once __DIR__ . '/../Controllers/LoginController.php';
+require_once __DIR__ . '/../Controllers/HistorialController.php';
 
 $router = new AltoRouter();
 
-// Ejemplo de ruta
-$router->map('GET', '/', function() {
-    echo 'Página principal';
+// Rutas
+$router->map('GET', '/', function (){
+    $controller = new LoginController;
+    $conexion = $controller->mostrarLogin();
+});
+$router->map('POST', '/login', function (){
+    $controller = new LoginController;
+    $controller->login();
+});
+$router->map('POST', '/registrar', function (){
+    $controller = new LoginController;
+    $controller->registrar();
+});
+$router->map('GET', '/historial', function (){
+    $controller = new HistorialController;
+    $controller->mostrarHistorial();
 });
 
 // Coincidir ruta actual
