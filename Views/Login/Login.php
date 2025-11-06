@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="css/loginestilos.css">
 </head>
 <body>
     <form method="POST" action="/login">
@@ -14,7 +15,7 @@
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" required>
         <br>
-        <button type="submit">Iniciar Sesión</button>
+        <button type="submit">Ingresar</button>
     </form>
 </body>
 </html>
