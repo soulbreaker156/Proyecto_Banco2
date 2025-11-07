@@ -49,11 +49,11 @@ class LoginController
             session_regenerate_id(true);
 
             // Guardar información del usuario en sesión
-            $_SESSION['user_id'] = $usuario['id'];
+            $_SESSION['user_id'] = $usuario['id_usuario'];
             $_SESSION['username'] = $usuario['nombre'];
             $_SESSION['login_time'] = time();
 
-       
+
             header('Location: /historial');
             exit;
         } else {
@@ -86,6 +86,41 @@ class LoginController
         }
     }
 
+    public function logout()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Destruir todas las variables de sesión
+        $_SESSION = [];
+
+        // Destruir la sesión
+        session_destroy();
+
+        // Redirigir al login
+        header('Location: /');
+        exit;
+    }
+
+    // Método para verificar si el usuario está logueado
+    public static function estaLogueado()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        return isset($_SESSION['user_id']) && isset($_SESSION['username']);
+    }
+
+    // Método para requerir login
+    public static function requerirLogin()
+    {
+        if (!self::estaLogueado()) {
+            header('Location: /?error=acceso_denegado');
+            exit;
+        }
+    }
 
     public function __destruct()
     {
