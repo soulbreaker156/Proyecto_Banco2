@@ -27,11 +27,41 @@ class UsuarioModel
     }
     public function registrarUsuario($nombre, $password)
     {
-        // Hashear la contraseña antes de guardarla
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        try {
+            // Iniciar transacción
+            $this->conexion->beginTransaction();
 
-        $stmt = $this->conexion->prepare("INSERT INTO usuarios (nombre, contrasena) VALUES (?, ?)");
-        return $stmt->execute([$nombre, $hashedPassword]);
+            // Verificar si el usuario ya existe
+            $stmtVerificar = $this->conexion->prepare("SELECT COUNT(*) FROM usuarios WHERE nombre = ?");
+            $stmtVerificar->execute([$nombre]);
+
+            if ($stmtVerificar->fetchColumn() > 0) {
+                // Usuario ya existe
+                $this->conexion->rollback();
+                return false;
+            }
+
+            // Hashear la contraseña
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Insertar usuario
+            $stmtInsertar = $this->conexion->prepare("INSERT INTO usuarios (nombre, contrasena) VALUES (?, ?)");
+            $resultado = $stmtInsertar->execute([$nombre, $hashedPassword]);
+
+            if (!$resultado) {
+                // Error al insertar
+                $this->conexion->rollback();
+                return false;
+            }
+
+            // Confirmar transacción
+            $this->conexion->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->conexion->rollback();
+            error_log("Error en registrarUsuario: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function __destruct()

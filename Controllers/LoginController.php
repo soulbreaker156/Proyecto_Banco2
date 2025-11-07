@@ -61,7 +61,7 @@ class LoginController
         }
     }
     public function registrar()
-    {
+    {  
         // Validar que los datos existan
         if (!isset($_POST['username']) || !isset($_POST['password'])) {
             echo "Datos incompletos.";
@@ -103,24 +103,6 @@ class LoginController
         exit;
     }
 
-    // Método para verificar si el usuario está logueado
-    public static function estaLogueado()
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        return isset($_SESSION['user_id']) && isset($_SESSION['username']);
-    }
-
-    // Método para requerir login
-    public static function requerirLogin()
-    {
-        if (!self::estaLogueado()) {
-            header('Location: /?error=acceso_denegado');
-            exit;
-        }
-    }
 
     public function __destruct()
     {
