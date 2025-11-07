@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Satoshi", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #333;
+  height: 100%;
+}
+/* Estilos para la barra de navegación */
+.navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  background-color: #004080;
+  padding: 20px;
+  height: 10%;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.navegacion ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+.navegacion ul li {
+  margin: 0 15px;
+}
+.navegacion ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 30px;
+  display: inline-block; 
+  transition: transform 0.3s ease; 
+}
+.navegacion ul li a:hover {
+  transform: scale(1.2);
+  transform: translateY(-5px);
+  color: #d7d7d7;
+}
