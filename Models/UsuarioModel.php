@@ -63,6 +63,13 @@ class UsuarioModel
         }
     }
 
+    public function obtenerUsuarios()
+    {
+        $stmt = $this->conexion->prepare("SELECT id_usuario, nombre FROM usuarios");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function __destruct()
     {
         $this->conexion = null;
