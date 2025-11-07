@@ -14,6 +14,12 @@ class LoginController
         $mensaje_error = $error;
         require_once __DIR__ . '/../Views/Login/Login.php';
     }
+    public function mostrarRegistro($error = null)
+    {
+        // Pasar el error a la vista si existe
+        $mensaje_error = $error;
+        require_once __DIR__ . '/../Views/Registrar/Registrar.php';
+    }
 
     public function login()
     {
