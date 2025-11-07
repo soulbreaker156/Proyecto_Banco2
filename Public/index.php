@@ -15,6 +15,10 @@ $router->map('POST', '/login', function (){
     $controller = new LoginController;
     $controller->login();
 });
+$router->map('GET', '/registrar', function (){
+    $controller = new LoginController;
+    $conexion = $controller->mostrarRegistro();
+});
 $router->map('POST', '/registrar', function (){
     $controller = new LoginController;
     $controller->registrar();
