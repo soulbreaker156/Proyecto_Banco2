@@ -63,12 +63,20 @@ class UsuarioModel
         }
     }
 
-    public function obtenerUsuarios()
+    public function obtenerUsuarios($usuarioLogueadoId)
     {
-        $stmt = $this->conexion->prepare("SELECT id_usuario, nombre FROM usuarios");
-        $stmt->execute();
-        return $stmt->fetchAll();
+        if($usuarioLogueadoId !== null) {
+            // Consulta excluyendo al usuario logueado
+            $stmt = $this->conexion->prepare("SELECT id_usuario, nombre FROM usuarios WHERE id_usuario != ?");
+            $stmt->execute([$usuarioLogueadoId]);
+            return $stmt->fetchAll();
+        }   
+        else{
+            return false;
+        }
+
     }
+
 
     public function __destruct()
     {
