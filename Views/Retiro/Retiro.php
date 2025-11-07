@@ -16,6 +16,6 @@
             <li><a href="/cerrar_sesion">Cerrar sesión</a></li>
         </ul>
     </nav>
+    <h1>Realizar Retiro</h1>
 </body>
-<h1>Historial de Transacciones</h1>
 </html>

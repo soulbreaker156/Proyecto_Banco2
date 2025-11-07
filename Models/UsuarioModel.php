@@ -44,7 +44,6 @@ class UsuarioModel
             // Hashear la contraseña
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-            // Insertar usuario
             $stmtInsertar = $this->conexion->prepare("INSERT INTO usuarios (nombre, contrasena) VALUES (?, ?)");
             $resultado = $stmtInsertar->execute([$nombre, $hashedPassword]);
 
