@@ -9,7 +9,7 @@ $router = new AltoRouter();
 // Rutas
 $router->map('GET', '/', function (){
     $controller = new LoginController;
-    $conexion = $controller->mostrarLogin();
+    $controller->mostrarLogin();
 });
 $router->map('POST', '/login', function (){
     $controller = new LoginController;
