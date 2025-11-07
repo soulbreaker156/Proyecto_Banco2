@@ -69,7 +69,7 @@ function mostrarAccesoRestringido()
     </head>
     <body>
         <div class='contenedor'>
-            <h1>🔒 Acceso Restringido</h1>
+            <h1>Acceso Restringido</h1>
             <p>No tienes autorización para acceder a esta página.</p>
             <p>Por favor, inicia sesión para continuar.</p>
             <a href='/'>Ir al Login</a>
@@ -95,6 +95,10 @@ $router->map('GET', '/registrar', function () {
     $controller->mostrarRegistro();
 });
 $router->map('POST', '/registrar', function () {
+    $controller = new LoginController;
+    $controller->registrar();
+});
+$router->map('POST', '/register', function () {
     $controller = new LoginController;
     $controller->registrar();
 });
