@@ -42,7 +42,7 @@ body {
   transform: translateY(-5px);
   color: #d7d7d7;
 }
-/* Estilos para el contenedor principal */
+/* Estilos para el contenedor principal en deposito y retiro */
 .contenedor {
   max-width: 60%;
   max-height: 90%;

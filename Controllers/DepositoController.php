@@ -15,7 +15,17 @@ class DepositoController
 
     public function mostrarDeposito()
     {
-        $usuarios = $this->usuarioModel->obtenerUsuarios();
+        $usuarioLogueadoId = null;
+        if ($usuarioLogueadoId === null) {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            // Obtener el ID del usuario logueado de la sesión
+            $usuarioLogueadoId = $_SESSION['user_id'] ?? null;
+        }
+
+        $usuarios = $this->usuarioModel->obtenerUsuarios($usuarioLogueadoId);
         require_once __DIR__ . '/../Views/Deposito/Deposito.php';
     }
     public function deposito(){
