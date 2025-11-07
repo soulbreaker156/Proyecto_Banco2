@@ -37,11 +37,18 @@ body {
   display: inline-block; 
   transition: transform 0.3s ease; 
 }
-.navegacion ul li a:hover {
+
+.opcion:hover {
   transform: scale(1.2);
   transform: translateY(-5px);
   color: #d7d7d7;
 }
+.cerrar:hover{
+  transform: scale(1.2);
+  transform: translateY(-5px);
+  color:#ff4d4d;
+}
+
 /* Estilos para el contenedor principal en deposito y retiro */
 .contenedor {
   max-width: 60%;
