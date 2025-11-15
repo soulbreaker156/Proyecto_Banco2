@@ -20,11 +20,11 @@
         <h1>Realizar Retiro</h1>
         <form action="/procesar_retiro" method="POST" class="formulario">
             <label for="usuario">Selecciona un usuario:</label>
-            <select id="usuario" name="id_usuario" required>
+            <select id="usuario" name="id_cliente" required>
                 <option value="" disabled selected>-- Selecciona un usuario --</option>
-                <?php foreach ($usuarios as $usuario): ?>
-                    <option value="<?php echo htmlspecialchars($usuario['id_usuario']); ?>">
-                        <?php echo htmlspecialchars($usuario['nombre'] . ' - ' . $usuario['cuenta']); ?>
+                <?php foreach ($clientes as $cliente): ?>
+                    <option value="<?php echo htmlspecialchars($cliente['id_cliente']); ?>">
+                        <?php echo htmlspecialchars($cliente['nombre'] . ' - ' . $cliente['cuenta']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>

@@ -65,24 +65,7 @@ class UsuarioModel
         }
     }
 
-    public function obtenerCuentas($usuarioLogueadoId)
-    {
-        if($usuarioLogueadoId !== null) {
-            // Consulta excluyendo al usuario logueado
-            $stmt = $this->conexion->prepare("SELECT id_usuario, nombre, cuenta FROM usuarios ");
-            $stmt->execute();
-            return $stmt->fetchAll();
-        }   
-        else{
-            return false;
-        }
-
-    }
-    public function actualizarSaldo($id_usuario, $monto)
-    {
-        $stmt = $this->conexion->prepare("UPDATE usuarios SET saldo_total = saldo_total + ? WHERE id_usuario = ?");
-        return $stmt->execute([$monto, $id_usuario]);
-    }
+    
 
 
     public function __destruct()
