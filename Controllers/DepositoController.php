@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . '/../Models/TransaccionModel.php';
-require_once __DIR__ . '/../Models/UsuarioModel.php';
+require_once __DIR__ . '/../Models/ClienteModel.php';
 
 class DepositoController
 {
     private $transaccionModel;
-    private $usuarioModel;
+    private $clienteModel;
 
     public function __construct()
     {
         $this->transaccionModel = new TransaccionModel();
-        $this->usuarioModel = new UsuarioModel();
+        $this->clienteModel = new ClienteModel();
     }
 
     public function mostrarDeposito()
@@ -25,16 +25,16 @@ class DepositoController
             $usuarioLogueadoId = $_SESSION['user_id'] ?? null;
         }
 
-        $usuarios = $this->usuarioModel->obtenerCuentas($usuarioLogueadoId);
+        $clientes = $this->clienteModel->obtenerCuentas($usuarioLogueadoId);
         require_once __DIR__ . '/../Views/Deposito/Deposito.php';
     }
     public function deposito(){
 
-        if (!isset($_POST['id_usuario']) || !isset($_POST['monto']) || !isset($_POST['concepto'])) {
+        if (!isset($_POST['id_cliente']) || !isset($_POST['monto']) || !isset($_POST['concepto'])) {
             return false;
         }
 
-        $id_usuario = $_POST['id_usuario'];
+        $id_cliente = $_POST['id_cliente'];
         $monto = $_POST['monto'];
         $concepto = $_POST['concepto'];
 
@@ -46,7 +46,7 @@ class DepositoController
             return false;
         }
 
-        $resultado = $this->transaccionModel->procesarDeposito($monto, $concepto, $id_usuario);
+        $resultado = $this->transaccionModel->procesarDeposito($monto, $concepto, $id_cliente);
         if ($resultado) {
             header('Location: /historial');
             exit;

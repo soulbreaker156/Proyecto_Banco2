@@ -43,4 +43,28 @@ class ClienteModel {
         $this->conexion->commit();
         return true;
     }
+
+    public function obtenerCuentas($usuarioLogueadoId)
+    {
+        if($usuarioLogueadoId !== null) {
+            // Consulta excluyendo al usuario logueado
+            $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM clientes ");
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }   
+        else{
+            return false;
+        }
+
+    }
+    public function actualizarSaldo($id_cliente, $monto)
+    {
+        $stmt = $this->conexion->prepare("UPDATE clientes SET saldo_total = saldo_total + ? WHERE id_cliente = ?");
+        return $stmt->execute([$monto, $id_cliente]);
+    }
+
+     public function __destruct()
+    {
+        $this->conexion = null;
+    }
 }
