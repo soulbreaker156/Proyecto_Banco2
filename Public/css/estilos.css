@@ -155,3 +155,51 @@ body {
   color: #555;
   font-size: 0.95rem;
 }
+/* Estilos para la tabla de historial */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,64,128,0.08);
+}
+
+.tabla th, .tabla td {
+  padding: 14px 10px;
+  text-align: center;
+}
+
+.tabla th {
+  background: #004080;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.tabla tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background 0.2s;
+}
+
+.tabla tr:hover {
+  background: #eaf3fa;
+}
+
+.tabla td {
+  color: #333;
+  font-size: 1rem;
+}
+
+.tabla tr:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 700px) {
+  .tabla th, .tabla td {
+    padding: 10px 4px;
+    font-size: 0.95rem;
+  }
+}

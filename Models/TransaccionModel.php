@@ -63,4 +63,24 @@ class TransaccionModel
             return false;
         }
     }
+    public function obtenerTransacciones()
+    {
+        $stmt = $this->conexion->prepare("SELECT t.id_transaccion, t.monto, t.tipo_mov, t.concepto, t.fecha_mov, c.nombre AS cliente_nombre
+                                          FROM transacciones t
+                                          JOIN cliente c ON t.fk_cliente = c.id_cliente
+                                          ORDER BY t.fecha_mov DESC");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    public function obtenerTransaccionesPorCliente($id_cliente)
+    {
+        $stmt = $this->conexion->prepare(
+            "SELECT t.id_transaccion, t.monto, t.tipo_mov, t.concepto, t.fecha_mov
+         FROM transacciones t
+         WHERE t.fk_cliente = ?
+         ORDER BY t.fecha_mov DESC"
+        );
+        $stmt->execute([$id_cliente]);
+        return $stmt->fetchAll();
+    }
 }

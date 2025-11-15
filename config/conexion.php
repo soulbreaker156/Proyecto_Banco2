@@ -3,8 +3,8 @@ function getConexion() {
     $host = "localhost";
     $user = "postgres";
     $port = "5432";
-    $password = "Jeff0101Valle";
-    $database = "Banco2";
+    $password = "Admin123";
+    $database = "banco2";
 
     try {
         $conexion = new PDO("pgsql:host=$host;port=$port;dbname=$database", $user, $password);
