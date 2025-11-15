@@ -41,7 +41,6 @@
             <table class="tabla">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Monto</th>
                         <th>Tipo</th>
                         <th>Concepto</th>
