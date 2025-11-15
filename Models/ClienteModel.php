@@ -1,35 +1,38 @@
 <?php
 
 require_once __DIR__ . '/../config/conexion.php';
-class ClienteModel {
+class ClienteModel
+{
     private $conexion;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->conexion = getConexion();
     }
 
-    public function obtenerClientes() {
+    public function obtenerClientes()
+    {
         $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM cliente");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
-    public function agregarCliente($nombre, $apellido, $fecha_nacimiento,) {
+    public function agregarCliente($nombre, $apellido, $fecha_nacimiento,)
+    {
         // Iniciar transacción
         $this->conexion->beginTransaction();
-         
-            // Generar número de cuenta único
-            do {
+
+        // Generar número de cuenta único
+        do {
             $cuenta = '';
-                for ($i = 0; $i < 12; $i++) {
-                    $cuenta .= mt_rand(0, 9);
-                }
+            for ($i = 0; $i < 12; $i++) {
+                $cuenta .= mt_rand(0, 9);
+            }
 
             $stmtVerificarCuenta = $this->conexion->prepare("SELECT COUNT(*) FROM cliente WHERE cuenta = ?");
             $stmtVerificarCuenta->execute([$cuenta]);
+        } while ($stmtVerificarCuenta->fetchColumn() > 0);
 
-            } while ($stmtVerificarCuenta->fetchColumn() > 0);
-                
         $stmt = $this->conexion->prepare("INSERT INTO cliente (nombre, apellido, fecha_nacimiento, cuenta) VALUES (?, ?, ?, ?)");
         $resultado = $stmt->execute([$nombre, $apellido, $fecha_nacimiento, $cuenta]);
 
@@ -46,24 +49,34 @@ class ClienteModel {
 
     public function obtenerCuentas($usuarioLogueadoId)
     {
-        if($usuarioLogueadoId !== null) {
+        if ($usuarioLogueadoId !== null) {
             // Consulta excluyendo al usuario logueado
             $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM cliente ");
             $stmt->execute();
             return $stmt->fetchAll();
-        }   
-        else{
+        } else {
             return false;
         }
-
     }
     public function actualizarSaldo($id_cliente, $monto)
     {
-        $stmt = $this->conexion->prepare("UPDATE cliente SET saldo_total = saldo_total + ? WHERE id_cliente = ?");
-        return $stmt->execute([$monto, $id_cliente]);
+        // Obtener el saldo actual
+        $stmt = $this->conexion->prepare("SELECT saldo_total FROM cliente WHERE id_cliente = ?");
+        $stmt->execute([$id_cliente]);
+        $saldo = $stmt->fetchColumn();
+
+        
+        $nuevoSaldo = $saldo + $monto;
+        if ($nuevoSaldo < 0) {
+            $nuevoSaldo = 0;
+        }
+
+        // Actualizar el saldo en la base de datos
+        $stmtUpdate = $this->conexion->prepare("UPDATE cliente SET saldo_total = ? WHERE id_cliente = ?");
+        return $stmtUpdate->execute([$nuevoSaldo, $id_cliente]);
     }
 
-     public function __destruct()
+    public function __destruct()
     {
         $this->conexion = null;
     }
