@@ -51,7 +51,6 @@
                 <tbody>
                     <?php foreach ($historial as $mov): ?>
                         <tr>
-                            <td><?php echo $mov['id_transaccion']; ?></td>
                             <td><?php echo $mov['monto']; ?></td>
                             <td><?php echo ucfirst($mov['tipo_mov']); ?></td>
                             <td><?php echo htmlspecialchars($mov['concepto']); ?></td>
