@@ -47,10 +47,11 @@ class RetiroController
 
         $resultado = $this->transaccionModel->procesarRetiro($monto, $concepto, $id_cliente);
         if ($resultado) {
-            header('Location: /historial');
+            echo "<script>alert('Retiro realizado correctamente'); window.location.href='/historial';</script>";
             exit;
         } else {
-            echo "Error al procesar el retiro. Por favor, inténtelo de nuevo.";
+            echo "<script>alert('Error al procesar el retiro'); window.location.href='/retiro';</script>";
+            exit;
         }
     }
 }

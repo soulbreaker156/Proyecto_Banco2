@@ -13,6 +13,7 @@
             <li><a href="/historial" class="opcion">Historial</a></li>
             <li><a href="/deposito" class="opcion">Deposito</a></li>
             <li><a href="/retiro" class="opcion">Retiro</a></li>
+            <li><a href="/cliente" class="opcion">Cliente</a></li>
             <li><a href="/cerrar_sesion" class="cerrar">Cerrar sesión</a></li>
         </ul>
     </nav>
