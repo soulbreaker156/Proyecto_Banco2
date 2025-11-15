@@ -9,7 +9,7 @@ class ClienteModel {
     }
 
     public function obtenerClientes() {
-        $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM clientes");
+        $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM cliente");
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -30,7 +30,7 @@ class ClienteModel {
 
             } while ($stmtVerificarCuenta->fetchColumn() > 0);
                 
-        $stmt = $this->conexion->prepare("INSERT INTO clientes (nombre, apellido, fecha_nacimiento, cuenta) VALUES (?, ?, ?, ?)");
+        $stmt = $this->conexion->prepare("INSERT INTO cliente (nombre, apellido, fecha_nacimiento, cuenta) VALUES (?, ?, ?, ?)");
         $resultado = $stmt->execute([$nombre, $apellido, $fecha_nacimiento, $cuenta]);
 
         if (!$resultado) {
@@ -48,7 +48,7 @@ class ClienteModel {
     {
         if($usuarioLogueadoId !== null) {
             // Consulta excluyendo al usuario logueado
-            $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM clientes ");
+            $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM cliente ");
             $stmt->execute();
             return $stmt->fetchAll();
         }   
@@ -59,7 +59,7 @@ class ClienteModel {
     }
     public function actualizarSaldo($id_cliente, $monto)
     {
-        $stmt = $this->conexion->prepare("UPDATE clientes SET saldo_total = saldo_total + ? WHERE id_cliente = ?");
+        $stmt = $this->conexion->prepare("UPDATE cliente SET saldo_total = saldo_total + ? WHERE id_cliente = ?");
         return $stmt->execute([$monto, $id_cliente]);
     }
 

@@ -19,9 +19,9 @@
     <main class="contenedor">
         <h1>Realizar Retiro</h1>
         <form action="/procesar_retiro" method="POST" class="formulario">
-            <label for="usuario">Selecciona un usuario:</label>
+            <label for="usuario">Selecciona un cliente:</label>
             <select id="usuario" name="id_cliente" required>
-                <option value="" disabled selected>-- Selecciona un usuario --</option>
+                <option value="" disabled selected>-- Selecciona un cliente --</option>
                 <?php foreach ($clientes as $cliente): ?>
                     <option value="<?php echo htmlspecialchars($cliente['id_cliente']); ?>">
                         <?php echo htmlspecialchars($cliente['nombre'] . ' - ' . $cliente['cuenta']); ?>
