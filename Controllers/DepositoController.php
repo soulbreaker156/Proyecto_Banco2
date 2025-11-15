@@ -25,7 +25,7 @@ class DepositoController
             $usuarioLogueadoId = $_SESSION['user_id'] ?? null;
         }
 
-        $usuarios = $this->usuarioModel->obtenerUsuarios($usuarioLogueadoId);
+        $usuarios = $this->usuarioModel->obtenerCuentas($usuarioLogueadoId);
         require_once __DIR__ . '/../Views/Deposito/Deposito.php';
     }
     public function deposito(){

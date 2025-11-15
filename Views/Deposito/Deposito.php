@@ -24,7 +24,7 @@
                 <option value="" disabled selected>-- Selecciona un usuario --</option>
                 <?php foreach ($usuarios as $usuario): ?>
                     <option value="<?php echo htmlspecialchars($usuario['id_usuario']); ?>">
-                        <?php echo htmlspecialchars($usuario['nombre']); ?>
+                        <?php echo htmlspecialchars($usuario['nombre'] . ' - ' . $usuario['cuenta']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
