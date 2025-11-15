@@ -40,12 +40,24 @@ class UsuarioModel
                 $this->conexion->rollback();
                 return false;
             }
+            // Generar número de cuenta único
+            do {
+            $cuenta = '';
+                for ($i = 0; $i < 12; $i++) {
+                    $cuenta .= mt_rand(0, 9);
+                }
+
+            $stmtVerificarCuenta = $this->conexion->prepare("SELECT COUNT(*) FROM usuarios WHERE cuenta = ?");
+            $stmtVerificarCuenta->execute([$cuenta]);
+
+            } while ($stmtVerificarCuenta->fetchColumn() > 0);
+                
 
             // Hashear la contraseña
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-            $stmtInsertar = $this->conexion->prepare("INSERT INTO usuarios (nombre, contrasena) VALUES (?, ?)");
-            $resultado = $stmtInsertar->execute([$nombre, $hashedPassword]);
+            $stmtInsertar = $this->conexion->prepare("INSERT INTO usuarios (nombre, contrasena, cuenta) VALUES (?, ?, ?)");
+            $resultado = $stmtInsertar->execute([$nombre, $hashedPassword, $cuenta]);
 
             if (!$resultado) {
                 // Error al insertar
