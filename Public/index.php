@@ -112,8 +112,8 @@ $router->map('GET', '/historial', function () {
     if (!verificarSesion()) {
         mostrarAccesoRestringido();
     }
-    $controller = new HistorialController;
-    $controller->mostrarHistorial();
+    $controller = new HistorialController();
+    $controller->index();
 });
 
 $router->map('GET', '/cerrar_sesion', function () {
