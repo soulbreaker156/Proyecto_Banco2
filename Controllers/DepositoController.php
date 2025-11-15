@@ -48,10 +48,11 @@ class DepositoController
 
         $resultado = $this->transaccionModel->procesarDeposito($monto, $concepto, $id_cliente);
         if ($resultado) {
-            header('Location: /historial');
+            echo "<script>alert('Depósito realizado correctamente'); window.location.href='/historial';</script>";
             exit;
         } else {
-            echo "Error al procesar el depósito. Por favor, inténtelo de nuevo.";
+            echo "<script>alert('Error al procesar el depósito'); window.location.href='/deposito';</script>";
+            exit;
         }
     }
 }

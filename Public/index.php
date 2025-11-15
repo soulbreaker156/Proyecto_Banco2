@@ -7,6 +7,7 @@ require_once __DIR__ . '/../Controllers/DepositoController.php';
 require_once __DIR__ . '/../Controllers/RetiroController.php';
 require_once __DIR__ . '/../Controllers/DepositoController.php';
 require_once __DIR__ . '/../Controllers/RetiroController.php';
+require_once __DIR__ . '/../Controllers/ClienteController.php';
 
 // Función para verificar si el usuario tiene sesión activa
 function verificarSesion()
@@ -149,6 +150,21 @@ $router->map('POST', '/procesar_retiro', function () {
     }
     $controller = new RetiroController;
     $controller->retiro();
+});
+
+$router->map('GET', '/cliente', function () {
+    if (!verificarSesion()) {
+        mostrarAccesoRestringido();
+    }
+    $controller = new ClienteController;
+    $controller->mostrarFormularioCliente();
+});
+$router->map('POST', '/cliente/registrar', function () {
+    if (!verificarSesion()) {
+        mostrarAccesoRestringido();
+    }
+    $controller = new ClienteController;
+    $controller->registrarCliente();
 });
 
 // Coincidir ruta actual

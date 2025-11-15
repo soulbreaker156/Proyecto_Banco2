@@ -54,10 +54,11 @@ class LoginController
             $_SESSION['login_time'] = time();
 
 
-            header('Location: /historial');
+            echo "<script>alert('Sesión iniciada correctamente'); window.location.href='/historial';</script>";
             exit;
         } else {
-            $this->mostrarLogin("Credenciales inválidas.");
+            echo "<script>alert('Credenciales inválidas'); window.location.href='/';</script>";
+            exit;
         }
     }
     public function registrar()
@@ -80,9 +81,11 @@ class LoginController
         $resultado = $this->usuarioModel->registrarUsuario($username, $password);
 
         if ($resultado) {
-            echo "Usuario registrado exitosamente.";
+            echo "<script>alert('Usuario registrado correctamente'); window.location.href='/';</script>";
+            exit;
         } else {
-            echo "Error al registrar usuario.";
+            echo "<script>alert('Error al registrar usuario'); window.location.href='/registrar';</script>";
+            exit;
         }
     }
 
