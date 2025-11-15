@@ -143,6 +143,13 @@ $router->map('POST', '/procesar_deposito', function () {
     $controller = new DepositoController;
     $controller->deposito();
 });
+$router->map('POST', '/procesar_retiro', function () {
+    if (!verificarSesion()) {
+        mostrarAccesoRestringido();
+    }
+    $controller = new RetiroController;
+    $controller->retiro();
+});
 
 // Coincidir ruta actual
 $match = $router->match();
