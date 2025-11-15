@@ -51,7 +51,7 @@ class ClienteModel
     {
         if ($usuarioLogueadoId !== null) {
             // Consulta excluyendo al usuario logueado
-            $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta FROM cliente ");
+            $stmt = $this->conexion->prepare("SELECT id_cliente, nombre, apellido, cuenta, saldo_total FROM cliente ");
             $stmt->execute();
             return $stmt->fetchAll();
         } else {
