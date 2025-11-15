@@ -1,28 +1,28 @@
 <?php
 
 require_once __DIR__ . '/../config/conexion.php';
-require_once __DIR__ . '/../Models/UsuarioModel.php';
+require_once __DIR__ . '/../Models/ClienteModel.php';
 
 class TransaccionModel
 {
     private $conexion;
-    private $usuarioModel;
+    private $clienteModel;
 
     public function __construct()
     {
         $this->conexion = getConexion();
-        $this->usuarioModel = new UsuarioModel();
+        $this->clienteModel = new ClienteModel();
     }
 
-    public function procesarDeposito($monto, $concepto, $id_usuario)
+    public function procesarDeposito($monto, $concepto, $id_cliente)
     {
         try {
             $this->conexion->beginTransaction();
 
-            $stmtInsertar = $this->conexion->prepare("INSERT INTO transacciones (monto,tipo_mov, concepto, fecha_mov,fk_usuario) VALUES (?, 'deposito', ?, NOW(), ?)");
-            $resultado = $stmtInsertar->execute([$monto, $concepto, $id_usuario]);
+            $stmtInsertar = $this->conexion->prepare("INSERT INTO transacciones (monto,tipo_mov, concepto, fecha_mov,fk_cliente) VALUES (?, 'deposito', ?, NOW(), ?)");
+            $resultado = $stmtInsertar->execute([$monto, $concepto, $id_cliente]);
 
-            $this->usuarioModel->actualizarSaldo($id_usuario, $monto);
+            $this->clienteModel->actualizarSaldo($id_cliente, $monto);
 
             if (!$resultado) {
                 // Error al insertar
@@ -39,15 +39,15 @@ class TransaccionModel
         }
     }
 
-    public function procesarRetiro($monto, $concepto, $id_usuario)
+    public function procesarRetiro($monto, $concepto, $id_cliente)
     {
         try {
             $this->conexion->beginTransaction();
 
-            $stmtInsertar = $this->conexion->prepare("INSERT INTO transacciones (monto,tipo_mov, concepto, fecha_mov,fk_usuario) VALUES (?, 'retiro', ?, NOW(), ?)");
-            $resultado = $stmtInsertar->execute([$monto, $concepto, $id_usuario]);
+            $stmtInsertar = $this->conexion->prepare("INSERT INTO transacciones (monto,tipo_mov, concepto, fecha_mov,fk_cliente) VALUES (?, 'retiro', ?, NOW(), ?)");
+            $resultado = $stmtInsertar->execute([$monto, $concepto, $id_cliente]);
 
-            $this->usuarioModel->actualizarSaldo($id_usuario, -$monto);
+            $this->clienteModel->actualizarSaldo($id_cliente, -$monto);
 
             if (!$resultado) {
                 // Error al insertar
